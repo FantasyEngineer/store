@@ -5,6 +5,7 @@ import com.cy.store.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * @author jimmy
@@ -30,5 +31,25 @@ public interface UserMapper {
      */
     @Select("select * from t_user where username = #{username}")
     User findByUsername(String username);
+
+
+    /**
+     * 根据uid获取到用户
+     *
+     * @param uid
+     * @return
+     */
+    @Select("select * from t_user where uid = #{uid}")
+    User findByUserUid(Integer uid);
+
+    /**
+     * 根据uid进行修改密码
+     *
+     * @param uid
+     * @param password
+     * @return
+     */
+    @Update("update t_user set password=#{password} where uid = #{uid}")
+    Integer updatePassword(Integer uid, String password);
 
 }

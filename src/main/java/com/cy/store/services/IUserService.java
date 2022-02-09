@@ -18,7 +18,19 @@ public interface IUserService {
 
     /**
      * 登录
+     *
      * @param user
      */
-    JsonResult<User> login(User user);
+    User login(User user);
+
+
+    /**
+     * 修改密码
+     * @param uid
+     * @param oldPassword
+     * @param newPassword
+     * @param newPasswordAgain
+     * @return
+     */
+    void changePassword(Integer uid, String oldPassword, String newPassword, String newPasswordAgain);
 }

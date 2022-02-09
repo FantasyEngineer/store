@@ -22,11 +22,11 @@ public class UserServiceTests {
 
     @Test
     public void login() {
-        User user = new User();
-        user.setUsername("test01");
-        user.setPassword("123");
-        JsonResult<User> result = userService.login(user);
-        System.out.println(result);
+//        User user = new User();
+//        user.setUsername("test01");
+//        user.setPassword("123");
+//        JsonResult<User> result = userService.login(user);
+//        System.out.println(result);
     }
 
     @Test
@@ -42,5 +42,11 @@ public class UserServiceTests {
             System.out.println(e.getMessage());
         }
 
+    }
+
+
+    @Test
+    public void changePassword() {
+        userService.changePassword(17, "123", "222", "222");
     }
 }

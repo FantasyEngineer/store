@@ -6,6 +6,8 @@ import com.cy.store.services.ex.ServiceException;
 import com.cy.store.services.ex.UserNameDuplicatedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * controller基类
  * @author jimmy
@@ -32,5 +34,24 @@ public class BaseController {
         return jsonResult;
 
     }
+
+    /**
+     * 从HttpSession对象中获取uid
+     * @param session HttpSession对象
+     * @return 当前登录的用户的id
+     */
+    protected final Integer getUidFromSession(HttpSession session) {
+        return Integer.valueOf(session.getAttribute("uid").toString());
+    }
+
+    /**
+     * 从HttpSession对象中获取用户名
+     * @param session HttpSession对象
+     * @return 当前登录的用户名
+     */
+    protected final String getUsernameFromSession(HttpSession session) {
+        return session.getAttribute("username").toString();
+    }
+
 
 }

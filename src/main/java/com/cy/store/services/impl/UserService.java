@@ -4,8 +4,7 @@ import com.cy.store.entity.JsonResult;
 import com.cy.store.entity.User;
 import com.cy.store.mapper.UserMapper;
 import com.cy.store.services.IUserService;
-import com.cy.store.services.ex.InsertException;
-import com.cy.store.services.ex.UserNameDuplicatedException;
+import com.cy.store.services.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -63,7 +62,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public JsonResult<User> login(User user) {
+    public User login(User user) {
         //获取到用户名
         String username = user.getUsername();
         //根据用户名查询到用户的数据
@@ -75,14 +74,53 @@ public class UserService implements IUserService {
         //加密密码得到新密码
         String md5Password = getMd5Password(password, salt);
 
-        JsonResult<User> userJsonResult = new JsonResult<>();
-        //将加密后的密码与查询到的密码进行比较
-        if (result.getPassword().equals(md5Password)) {
-            userJsonResult.success(result);
-        } else {
-            userJsonResult.fail();
+        // 判断查询结果中的密码，与以上加密得到的密码是否不一致
+        if (!result.getPassword().equals(md5Password)) {
+            // 是：抛出PasswordNotMatchException异常
+            throw new PasswordNotMatchException("密码验证失败的错误");
         }
-        return userJsonResult;
+
+        return result;
+
+    }
+
+    @Override
+    public void changePassword(Integer uid, String oldPassword, String newPassword, String newPasswordAgain) {
+        //根据uid获取用用户user
+        User user = userMapper.findByUserUid(uid);
+        if (user == null) {
+            // 是：抛出UserNotFoundException异常
+            throw new UserNotFoundException("用户数据不存在");
+        }
+
+        // 检查查询结果中的isDelete是否为1
+        if (user.getIs_delete().equals(1)) {
+            // 是：抛出UserNotFoundException异常
+            throw new UserNotFoundException("用户数据不存在");
+        }
+
+        String password = user.getPassword();
+
+        //判断用户输入的password与数据库中的password是否一致。
+        if (!password.equals(getMd5Password(oldPassword, user.getSalt()))) {
+            throw new PasswordNotInconsistentException();
+        }
+
+        //判断两个新密码输入的是否一致
+        if (!newPassword.equals(newPasswordAgain)) {
+            throw new PasswordNewNotEqualException();
+        }
+
+        //将新密码进行md5加密
+        String newPasswordMd5 = getMd5Password(newPassword, user.getSalt());
+
+        //将数据保存到数据库中
+        Integer row = userMapper.updatePassword(uid, newPasswordMd5);
+        if (row != 1) {
+            throw new UpdateException("更新用户数据时出现未知错误，请联系系统管理员");
+        } else {
+            System.out.println("更新成功");
+        }
     }
 
 
@@ -96,4 +134,6 @@ public class UserService implements IUserService {
         }
         return password;
     }
+
+
 }
