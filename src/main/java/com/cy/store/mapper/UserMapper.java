@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.Date;
+
 /**
  * @author jimmy
  * 用户注册的持久层
@@ -51,5 +53,15 @@ public interface UserMapper {
      */
     @Update("update t_user set password=#{password} where uid = #{uid}")
     Integer updatePassword(Integer uid, String password);
+
+
+    /**
+     * 更新用户信息
+     *
+     * @param user 需要更新的用户信息
+     * @return 1 更新成功 ！1 更新失败
+     */
+    @Update("update t_user set username = #{username} ,phone = #{phone} , email = #{email}, gender = #{gender}, avatar = #{avatar}, is_delete = #{isDelete} where uid =#{uid}")
+    Integer updateUserInfo(User user);
 
 }

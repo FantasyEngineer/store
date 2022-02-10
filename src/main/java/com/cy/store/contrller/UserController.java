@@ -50,4 +50,18 @@ public class UserController extends BaseController {
         return new JsonResult<Void>().success();
     }
 
+    @RequestMapping("findUserByUid")
+    public JsonResult<User> findUserByUid(HttpSession session) {
+        User user = iUserService.findUserByUid(getUidFromSession(session));
+        return new JsonResult<User>().success(user);
+    }
+
+    @RequestMapping("updateUserinfo")
+    public JsonResult<Void> updateUserinfo(HttpSession session, User user) {
+        Integer uid = getUidFromSession(session);
+        user.setUid(uid);
+        iUserService.updateUserInfo(user);
+        return new JsonResult<Void>().success();
+    }
+
 }

@@ -266,7 +266,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$.ajax({
-					url: "/users/get_by_uid",
+					url: "/users/findUserByUid",
 					type: "GET",
 					dataType: "json",
 					success: function(json) {
@@ -291,14 +291,14 @@
 
 			$("#btn-change-info").click(function() {
 				$.ajax({
-					url: "/users/change_info",
+					url: "/users/updateUserinfo",
 					type: "POST",
 					data: $("#form-change-info").serialize(),
 					dataType: "json",
 					success: function(json) {
 						if (json.state == 200) {
 							alert("修改成功！");
-							location.href = "login.html";
+							location.href = "userdata.html";
 						} else {
 							alert("修改失败！" + json.message);
 						}

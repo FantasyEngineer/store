@@ -8,6 +8,7 @@ import com.cy.store.services.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -121,6 +122,72 @@ public class UserService implements IUserService {
         } else {
             System.out.println("更新成功");
         }
+    }
+
+    /**
+     * 获取到用户的数据，根据uid
+     *
+     * @param uid
+     * @return
+     */
+    @Override
+    public User findUserByUid(Integer uid) {
+        User user = userMapper.findByUserUid(uid);
+        if (user == null || 1 == user.getIs_delete()) {
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
+
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     */
+    @Override
+    public void updateUserInfo(User user) {
+
+        //需要修改用户的UID
+        Integer uid = user.getUid();
+        //根据uid获取到用户数据
+        User result = findUserByUid(uid);
+
+        //是否删除
+        if (user.getIs_delete() != null) {
+            result.setIs_delete(user.getIs_delete());
+        }
+
+        //用户姓名
+        if (user.getUsername() != null) {
+            result.setUsername(user.getUsername());
+        }
+
+        //用户手机号
+        if (user.getPhone() != null) {
+            result.setPhone(user.getPhone());
+        }
+
+        //email
+        if (user.getEmail() != null) {
+            result.setEmail(user.getEmail());
+        }
+
+        //头像
+        if (user.getAvatar() != null) {
+            result.setAvatar(user.getAvatar());
+        }
+
+        //性别
+        if (user.getGender() != null) {
+            result.setGender(user.getGender());
+        }
+
+        Integer integer = userMapper.updateUserInfo(result);
+        if (integer != 1) {
+            throw new UpdateException();
+        }
+
     }
 
 

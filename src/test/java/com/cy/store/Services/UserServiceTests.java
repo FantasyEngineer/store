@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 //标注当前类是一个测试类，不会随同项目一起打包
 @SpringBootTest
 //启动这个单元测试类
@@ -19,6 +21,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserServiceTests {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     public void login() {
@@ -48,5 +52,24 @@ public class UserServiceTests {
     @Test
     public void changePassword() {
         userService.changePassword(17, "123", "222", "222");
+    }
+
+
+    @Test
+    public void updateUserInfo() {
+        User user = new User();
+        user.setUid(12);
+        user.setUsername("test修改的1111");
+
+        userMapper.updateUserInfo(user);
+    }
+
+
+    @Test
+    public void findUserByUid() {
+
+        User userByUid = userService.findUserByUid(14);
+        System.out.println(userByUid);
+
     }
 }

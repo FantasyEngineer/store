@@ -5,7 +5,7 @@ package com.cy.store.services.ex;
  */
 public class UserNotFoundException extends ServiceException{
     public UserNotFoundException() {
-        super();
+        super("用户数据不存在");
     }
 
     public UserNotFoundException(String message) {
