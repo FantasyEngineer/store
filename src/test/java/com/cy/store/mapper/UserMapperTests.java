@@ -22,5 +22,12 @@ public class UserMapperTests {
         user.setPassword("12313");
         Integer row = userMapper.insert(user);
         System.out.println(row);
+
+    }
+
+
+    @Test
+    public void testSaveAvatar() {
+        userMapper.updateAvatar(19, "dfdfdfd");
     }
 }

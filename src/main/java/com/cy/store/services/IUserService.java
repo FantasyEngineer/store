@@ -50,4 +50,11 @@ public interface IUserService {
      * @param user 需要更新的用户信息
      */
     void updateUserInfo(User user);
+
+    /**
+     * 保存用户头像
+     *
+     * @param avatar 头像的地址
+     */
+    void saveAvatar(Integer uid, String avatar);
 }

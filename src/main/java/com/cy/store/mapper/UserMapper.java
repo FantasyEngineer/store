@@ -64,4 +64,15 @@ public interface UserMapper {
     @Update("update t_user set username = #{username} ,phone = #{phone} , email = #{email}, gender = #{gender}, avatar = #{avatar}, is_delete = #{isDelete} where uid =#{uid}")
     Integer updateUserInfo(User user);
 
+
+    /**
+     * 更新头像
+     *
+     * @param uid
+     * @param avatar 头像在服务器上保存的位置
+     * @return
+     */
+    @Update("update t_user set avatar = #{avatar} where uid = #{uid}")
+    Integer updateAvatar(Integer uid, String avatar);
+
 }

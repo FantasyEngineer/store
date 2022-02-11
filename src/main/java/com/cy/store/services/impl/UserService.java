@@ -190,6 +190,22 @@ public class UserService implements IUserService {
 
     }
 
+    /**
+     * 保存头像
+     *
+     * @param uid
+     * @param avatar 头像的地址
+     */
+    @Override
+    public void saveAvatar(Integer uid, String avatar) {
+        Integer integer = userMapper.updateAvatar(uid, avatar);
+        if (integer != 1) {
+            throw new UpdateException("插入头像错误");
+        } else {
+            System.out.println("插入成功");
+        }
+    }
+
 
     /**
      * 根据密码，盐值，进行md5的加密

@@ -1,5 +1,9 @@
 package com.cy.store.contrller;
 
+import com.cy.store.contrller.ex.FileEmptyException;
+import com.cy.store.contrller.ex.FileOutOfSizeException;
+import com.cy.store.contrller.ex.FileTypeException;
+import com.cy.store.contrller.ex.FileUploadException;
 import com.cy.store.entity.JsonResult;
 import com.cy.store.services.ex.InsertException;
 import com.cy.store.services.ex.ServiceException;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * controller基类
+ *
  * @author jimmy
  */
 public class BaseController {
@@ -21,13 +26,19 @@ public class BaseController {
      * @param e
      * @return
      */
-    @ExceptionHandler(ServiceException.class)
+    @ExceptionHandler({ServiceException.class, FileUploadException.class})
     public JsonResult<Void> handlerException(Throwable e) {
         JsonResult<Void> jsonResult = new JsonResult<Void>(e);
         if (e instanceof UserNameDuplicatedException) {
             jsonResult.setState(100);
         } else if (e instanceof InsertException) {
             jsonResult.setState(300);
+        } else if (e instanceof FileEmptyException) {
+            jsonResult.setState(5000);
+        } else if (e instanceof FileTypeException) {
+            jsonResult.setState(5001);
+        } else if (e instanceof FileOutOfSizeException) {
+            jsonResult.setState(5002);
         } else {
             jsonResult.setState(900);
         }
@@ -37,6 +48,7 @@ public class BaseController {
 
     /**
      * 从HttpSession对象中获取uid
+     *
      * @param session HttpSession对象
      * @return 当前登录的用户的id
      */
@@ -46,6 +58,7 @@ public class BaseController {
 
     /**
      * 从HttpSession对象中获取用户名
+     *
      * @param session HttpSession对象
      * @return 当前登录的用户名
      */
