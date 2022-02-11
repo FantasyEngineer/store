@@ -26,4 +26,13 @@ public interface AddressMapper {
     Integer insertAddress(Address address);
 
 
+    /**
+     * 根据uid来查询用户的地址数量，（因为限制用户最多只能有20条记录）
+     * @param uid
+     * @return
+     */
+    @Select("select count(*) from t_address where uid = #{uid}")
+    int findCountByUid(Integer uid);
+
+
 }

@@ -389,7 +389,7 @@
 			
 			$("#btn-add-new-address").click(function() {
 				$.ajax({
-					url: "/addresses/add_new_address",
+					url: "/addresses/insertAddress",
 					type: "POST",
 					data: $("#form-add-new-address").serialize(),
 					dataType: "JSON",

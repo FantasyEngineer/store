@@ -35,7 +35,7 @@ public class Address extends BaseEntity {
     private String tel;
     //标签
     private String tag;
-    //是否是默认地址
+    //是否是默认地址，1为默认地址。 0位非默认地址
     private Integer isDefault;
 
 

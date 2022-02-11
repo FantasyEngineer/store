@@ -29,4 +29,10 @@ public class AddressMapperTests {
     }
 
 
+    @Test
+    public void findCountByUid() {
+        System.out.println(addressMapper.findCountByUid(1));
+    }
+
+
 }

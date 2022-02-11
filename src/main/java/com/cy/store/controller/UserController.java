@@ -5,8 +5,10 @@ import com.cy.store.controller.ex.FileEmptyException;
 import com.cy.store.controller.ex.FileOutOfSizeException;
 import com.cy.store.controller.ex.FileTypeException;
 import com.cy.store.controller.ex.FileUploadException;
+import com.cy.store.entity.Address;
 import com.cy.store.entity.JsonResult;
 import com.cy.store.entity.User;
+import com.cy.store.services.IAddressService;
 import com.cy.store.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -140,5 +142,4 @@ public class UserController extends BaseController {
         //浏览器查看路径下的图片http://localhost:8080/upload/5320997E-85CA-4FCE-9976-4B2D01DA1863.jpg
         return new JsonResult<String>().success(avatar);
     }
-
 }
