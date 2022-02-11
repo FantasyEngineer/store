@@ -1,9 +1,9 @@
-package com.cy.store.contrller;
+package com.cy.store.controller;
 
-import com.cy.store.contrller.ex.FileEmptyException;
-import com.cy.store.contrller.ex.FileOutOfSizeException;
-import com.cy.store.contrller.ex.FileTypeException;
-import com.cy.store.contrller.ex.FileUploadException;
+import com.cy.store.controller.ex.FileEmptyException;
+import com.cy.store.controller.ex.FileOutOfSizeException;
+import com.cy.store.controller.ex.FileTypeException;
+import com.cy.store.controller.ex.FileUploadException;
 import com.cy.store.entity.JsonResult;
 import com.cy.store.services.ex.InsertException;
 import com.cy.store.services.ex.ServiceException;

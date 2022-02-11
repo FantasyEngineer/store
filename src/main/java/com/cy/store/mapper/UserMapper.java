@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import java.util.Date;
-
 /**
  * @author jimmy
  * 用户注册的持久层

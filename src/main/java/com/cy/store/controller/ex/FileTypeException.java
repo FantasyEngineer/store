@@ -1,4 +1,4 @@
-package com.cy.store.contrller.ex;
+package com.cy.store.controller.ex;
 
 /**
  * 文件为空

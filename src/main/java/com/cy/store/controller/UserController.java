@@ -1,14 +1,13 @@
-package com.cy.store.contrller;
+package com.cy.store.controller;
 
 
-import com.cy.store.contrller.ex.FileEmptyException;
-import com.cy.store.contrller.ex.FileOutOfSizeException;
-import com.cy.store.contrller.ex.FileTypeException;
-import com.cy.store.contrller.ex.FileUploadException;
+import com.cy.store.controller.ex.FileEmptyException;
+import com.cy.store.controller.ex.FileOutOfSizeException;
+import com.cy.store.controller.ex.FileTypeException;
+import com.cy.store.controller.ex.FileUploadException;
 import com.cy.store.entity.JsonResult;
 import com.cy.store.entity.User;
 import com.cy.store.services.IUserService;
-import org.apache.ibatis.javassist.bytecode.analysis.MultiType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
